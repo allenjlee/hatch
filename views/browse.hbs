@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+</html>
+<head>
+    <!-- Bootstrap -->
+    <link href = "bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato|Libre+Baskerville|Libre+Franklin|Pacifico" rel="stylesheet">
+    
+    <!-- CSS Plugin -->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+    <!-- Theme CSS -->
+    <link href = "stylesheets/style.css" rel="stylesheet">
+    <link href="stylesheets/browse.css" rel="stylesheet">
+
+    <!--Jquery Plugin-->
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    
+</head>
+
+<body id="page-top" data-spy = "scroll" data-target=".navbar-fixed-top">
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand page-scroll" href="/">
+                        <span><img src="img/logo.png" width=25 height=25></span> Hatch
+                    </a>
+                </div>
+                <div class="col-sm-3 col-md-3">
+                    <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Choose A Dorm" name="q">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <!-- Collects the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a class="page-scroll" href="/createMeal">Host A Meal</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" onclick="redirect()" >Your Profile</a>
+                        </li>
+                        <script type="text/javascript"> 
+                        function redirect(){
+                            window.location.href = ("/login/"+document.getElementById("username").innerHTML);
+                        }
+                        </script>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+    </nav>
+    <header class ="browse-main">
+        <div class="browse-body">
+            <h1>Massachusetts Institute Of Technology</h1>
+            
+            {{#each mealinfos}}
+                <div class = "col-6 col-md-4">
+                    {{> mealinfo_partial}}
+                </div>
+            {{/each}}
+        </div>
+    </header>
+    <!-- jQuery -->
+    <script src="jquery/jquery.js"></script>
+
+
+    <!-- Theme JavaScript -->
+    <script src="js/hatch.js"></script>
+    <script src='/js/ajax.js'></script>
+<p id="username" hidden>{{currentUser}}</p>
+</body>
+</html>

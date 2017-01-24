@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Hatch</title>
+    <!-- Bootstrap -->
+    <link href = "bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato|Libre+Baskerville|Libre+Franklin|Pacifico" rel="stylesheet">
+    
+    <!-- CSS Plugin -->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <!-- Theme CSS -->
+    <link href = "stylesheets/style.css" rel = "stylesheet">
+    
+</head>
+
+
+{{#if isLoggedIn}} 
+{{else}}
+<script type= "text/javascript">
+
+
+    var apiKey = 'AIzaSyCU2ps1u-92ArCXgh2NqUSTcqBCe7QSWMQ';
+      // Enter the API Discovery Docs that describes the APIs you want to
+      // access. In this example, we are accessing the People API, so we load
+      // Discovery Doc found here: https://developers.google.com/people/api/rest/
+      var discoveryDocs = ["https://people.googleapis.com/$discovery/rest?version=v1"];
+      // Enter a client ID for a web application from the Google API Console:
+      //   https://console.developers.google.com/apis/credentials?project=_
+      // In your API Console project, add a JavaScript origin that corresponds
+      //   to the domain where you will be running the script.
+      var clientId = '557591258050-0hoam1pv6a9h8cgqekeju9l054q5c3ck.apps.googleusercontent.com';
+      // Enter one or more authorization scopes. Refer to the documentation for
+      // the API or https://developers.google.com/people/v1/how-tos/authorizing
+      // for details.
+      var scopes = "profile";
+     
+      function handleClientLoad() {
+        // Load the API client and auth2 library
+        gapi.load('client:auth2', initClient);
+      }
+
+
+
+
+      function initClient() {
+        gapi.client.init({
+            apiKey: apiKey,
+            discoveryDocs: discoveryDocs,
+            clientId: clientId,
+            scope: scopes
+        }).then(function () {
+          // Listen for sign-in state changes.
+          gapi.auth2.getAuthInstance().isSignedIn.listen(onSignInCallback);
+          // Handle the initial sign-in state.
+         onSignInCallback(gapi.auth2.getAuthInstance().isSignedIn.get());
+         
+        });
+      }
+
+
+      function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+          authorizeButton.style.display = 'none';
+          signoutButton.style.display = 'block';
+          makeApiCall();
+        } else {
+          authorizeButton.style.display = 'block';
+          signoutButton.style.display = 'none';
+        }
+      }
+      function handleAuthClick(event) {
+	 gapi.auth2.getAuthInstance().signIn();
+	
+       
+      }
+
+    
+
+
+
+  /**
+   * Handler for the signin callback triggered after the user selects an account.
+   */
+  function onSignInCallback(resp) {
+  	if(resp)
+  	{
+  		gapi.client.load('plus', 'v1', apiClientLoaded);
+  	}
+    
+  }
+
+  /**
+   * Sets up an API call after the Google API client loads.
+   */
+  function apiClientLoaded() {
+    gapi.client.plus.people.get({userId: 'me'}).execute(handleEmailResponse);
+  }
+
+  /**
+   * Response callback for when the API client receives a response.
+   *
+   * @param resp The API response object with the user email and profile information.
+   */
+  function handleEmailResponse(resp) {
+    var primaryEmail;
+    for (var i=0; i < resp.emails.length; i++) {
+      if (resp.emails[i].type === 'account') primaryEmail = resp.emails[i].value;
+    }
+   window.location.replace('/page'+primaryEmail)
+  }
+
+  </script>
+
+<script async defer src="https://apis.google.com/js/api.js" 
+      onload="this.onload=function(){};handleClientLoad()" 
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+{{/if}}
+
+
+
+
+
+<body id="page-top" data-spy = "scroll" data-target=".navbar-fixed-top">
+
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand page-scroll" href="#page-top">
+                    <span><img src="img/logo.png" width=25 height=25></span> Hatch
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="fake">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" onclick="redirect()">
+                        {{#if isLoggedIn}} 
+                        {{currentUser}}
+                        {{else}}
+                        Sign Up/Login
+                        {{/if}}
+
+                        </a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#why-hatch">Explore</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">About Us</a>
+                    </li>
+                    <li>
+                        {{#if isLoggedIn}} 
+                        <a class="page-scroll" onclick="redirectBrowse()">Browse</a>
+                        {{else}}
+                        {{/if}}
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <header class = "landing">
+        <div class = "landing-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-head">Hatch</h1>
+                        <p class="intro">Hang out with friends. Meet new people. Eat Food.<p>
+                        <a onclick="redirect()" class="btn btn-outline btn-xl page-scroll">Are You Ready?</a>
+                        <script type="text/javascript"> 
+                        function redirect(){
+                        	console.log(document.getElementById("username").value);
+                        	if(document.getElementById("username").innerHTML)
+                        	{
+                        		window.location.href = ("/login/"+document.getElementById("username").innerHTML);
+                        	}
+                        	else
+                        	{
+                        		window.location.href = ("/login");
+                        	}
+                            
+                        }
+
+
+                        function redirectBrowse(){
+                            window.location.href = ("/browse"+document.getElementById("username").innerHTML);
+                        }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <section id="why-hatch">
+        <div class = "container">
+            <div class="explore-heading">
+                <h2>How Hatch Works</h2>
+                <p class="first">Bringing home-cooked meals to students everywhere</p>
+                <hr>
+            </div>
+            <div class="blurbs row">
+                <div class="col-sm-4 blurb">
+                    <div id="website-icon">
+                        <img src="img/interface.png" width=120 height=120>
+                        <h3>Browse</h3>
+                    </div>
+                </div>
+                <div class="col-sm-4 blurb">
+                    <div id="food-icon">
+                        <img src= "img/food.png" width=120 height=120>
+                        <h3>Eat</h3>
+                    </div>
+                </div>
+                <div class="col-sm-4 blurb">
+                    <div id="people-icon">
+                        <img src="img/people.png" width=120 height=120>
+                        <h3>Hangout</h3>
+                    </div>
+                </div>
+            </div>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="about-heading">
+                <h2>About Us</h2>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div id="allen-pic">
+                        <img class="img-circle" src="img/allen.jpg" width=300 height=200>
+                    </div>
+                </div>
+            </div>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
+        </div>
+    </section>
+
+
+
+    <!-- jQuery -->
+    <script src="jquery/jquery.js"></script>
+
+
+    <!-- Theme JavaScript -->
+    <script src="js/hatch.js"></script>
+
+    <!-- Icon made by Freepik from www.flaticon.com -->
+
+<p id="username" hidden>{{currentUser}}</p>
+
+</body>
+
+</html>

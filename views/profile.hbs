@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html> 
+
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<style>
+
+h1 {
+    color: white;
+} 
+
+
+
+
+
+button {
+  border: solid 1px somecolor;
+  color: #eee;
+  border-radius:5px;
+ -moz-border-radius:5px;
+  background: -moz-linear-gradient(top, #5E5E5E 0%, #474747 51%, #0a0e0a 51%, #0a0809 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5E5E5E), color-stop(51%,#474747), color-stop(51%,#0a0e0a), color-stop(100%,#0a0809));
+}
+
+input {
+  border: 2px solid #999;
+  border-radius: 5px;
+
+  
+}
+
+
+
+
+body
+{
+background-image: url("http://www.activeaims.co.uk/wp-content/uploads/2013/01/preparing_food.jpg");
+background-repeat: no-repeat;
+background-size:cover;
+color:white;
+}
+h2{
+visibility: hidden;
+}
+title{
+visibility:hidden;
+}
+h1{
+font-size: 14px;
+}
+
+</style>
+</head>
+
+
+
+
+
+<title>{{title}}</title>
+<body>
+
+<h1><font color="white">Hello {{title}}</font></h1>
+
+
+
+<form name="addRecipe" id="addRecipe" method="post" action="/login/addRecipe/">
+Add a Recipe
+
+	<input type="String" id="Recipe" placeholder="" name="Recipe">
+	<button type="submit">Submit</button>
+	<h2> <input type="String" id="username" placeholder="" name="username"> </h2>
+	<script> document.getElementById("username").value=document.title;</script>
+</form>
+
+<p> <font size="8">Your Favorites </p>
+{{#each FavoriteRecipes}}
+<h1>{{ this }}</h1>
+{{/each}}
+
+
+
+
+   
+
+
+</body>
+</html>
