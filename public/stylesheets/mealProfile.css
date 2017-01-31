@@ -1,0 +1,190 @@
+.rating {
+        unicode-bidi: bidi-override;
+        direction: rtl;
+}
+
+.rating > span {
+display: inline-block;
+position: relative;
+width: 1.1em;
+}
+
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+content: "\2605";
+position: absolute;
+}
+
+
+body {
+    background: none;
+    background: url("../img/meal-background.jpg") fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: black;
+    
+}
+
+.image-view{
+    padding-top:100px;
+    min-height:420px;
+}
+
+.big-image{
+    width:600px;
+    height:400px;
+    vertical-align:top;
+    position: relative;
+    background-color: #eee;
+    background-size: cover;
+    background-position: center center;
+    border:1px black solid;
+    border-radius: 5px;
+}
+
+.big-description-body{
+    padding-bottom:50px;
+}
+.big-description-body h1{
+    margin-top:20px;
+    color:black;
+    font-size:38px;
+    font-weight:100;
+    text-align: center;
+    margin-bottom:0;
+}
+
+.charging{
+    text-align:center;
+    color:black;
+    font-size:25px;
+    font-weight: 100;
+}
+
+.createdBy{
+    text-align: center;
+    color:black;
+    font-size: 30px;
+    font-weight:100;
+}
+.when{
+    text-align:center;
+    color:black;
+    font-size: 20px;
+    font-weight:100;
+}
+
+.where{
+    text-align:center;
+    color:black;
+    font-size:24px;
+    font-weight:100;
+}
+
+.describe-meal{
+    text-align:center;
+    color:black;
+    font-size:18px;
+    font-weight:100;
+}
+
+.ppl-capacity{
+    text-align:center;
+    color:black;
+    font-size:18px;
+    font-weight:100;
+}
+
+.btn-attend{
+    margin-top:15px;
+    width:50%;
+}
+
+.big-description-body p{
+    font-weight:100;
+    margin: 0 0 0;
+    margin-top:10px;
+
+}
+
+.description-container{
+    padding-left:150px;
+    padding-right:150px;
+}
+
+
+
+
+.navbar-custom a{
+    color:black;
+}
+.navbar-custom {
+  margin-bottom: 0;
+  border-bottom: 1px solid black;
+  text-transform: uppercase;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: black;
+}
+.navbar-custom .navbar-toggle {
+  color: black;
+  background-color: black;
+  font-size: 12px;
+}
+.navbar-custom .navbar-toggle:focus,
+.navbar-custom .navbar-toggle:active {
+  outline: none;
+}
+.navbar-custom .navbar-brand {
+  font-weight: 500;
+}
+.navbar-custom .navbar-brand:focus {
+  outline: none;
+}
+
+.navbar-custom .nav li a {
+  -webkit-transition: background 0.3s ease-in-out;
+  -moz-transition: background 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out;
+}
+.navbar-custom .nav li a:hover {
+  color: darkslategrey;
+  outline: none;
+  background-color: transparent;
+}
+.navbar-custom .nav li a:focus,
+.navbar-custom .nav li a:active {
+  outline: none;
+  background-color: transparent;
+}
+.navbar-custom .nav li.active {
+  outline: none;
+}
+.navbar-custom .nav li.active a {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.navbar-custom .nav li.active a:hover {
+  color: black;
+}
+@media (min-width: 768px) {
+  .navbar-custom {
+    padding: 20px 0;
+    border-bottom: none;
+    letter-spacing: 1px;
+    background: transparent;
+    -webkit-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+    -moz-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+    transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+  }
+  .navbar-custom.top-nav-collapse {
+    padding: 0;
+    background: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+}
+
+
+.btn-outline {
+    color: black;
+    border-color: black;
+    border: 1px solid;
+}

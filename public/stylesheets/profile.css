@@ -1,0 +1,192 @@
+.bio h1 {
+    color: black;
+    font-size: 45px;
+    font-weight: 130;
+} 
+
+button {
+  border: solid 1px somecolor;
+  color: #eee;
+  border-radius:5px;
+ -moz-border-radius:5px;
+  background: -moz-linear-gradient(top, #5E5E5E 0%, #474747 51%, #0a0e0a 51%, #0a0809 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5E5E5E), color-stop(51%,#474747), color-stop(51%,#0a0e0a), color-stop(100%,#0a0809));
+}
+
+input {
+  border: 2px solid #999;
+  border-radius: 5px;
+
+  
+}
+
+body
+{
+    background:white;
+    background-repeat: no-repeat;
+    background-size:cover;
+    color:black;
+}
+h2{
+visibility: hidden;
+}
+title{
+visibility:hidden;
+}
+h1{
+font-size: 14px;
+}
+
+
+.bio{
+    display: table;
+    width: 100%;
+    height: auto;
+    padding-top: 100px;
+    text-align: center;
+    background:url("../img/testBackground.jpg") fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    color:white;
+}
+
+
+.profile-description{
+    margin-bottom: 30px;
+    overflow:hidden;
+}
+
+.propic{
+    position: relative;
+    padding-bottom: 70%;
+    background-color: #eee;
+    background-size: cover;
+    background-position: center center;
+    height:250px;
+    width:250px;
+
+}
+
+.profile-bio{
+    font-size: 14px;
+    font-weight: 100;
+    text-align: center center;
+}
+
+.navbar-custom a{
+    color:white;
+}
+.navbar-custom {
+  margin-bottom: 0;
+  border-bottom: 1px solid white;
+  text-transform: uppercase;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: black;
+}
+.navbar-custom .navbar-toggle {
+  color: black;
+  background-color: black;
+  font-size: 12px;
+}
+.navbar-custom .navbar-toggle:focus,
+.navbar-custom .navbar-toggle:active {
+  outline: none;
+}
+.navbar-custom .navbar-brand {
+  font-weight: 500;
+}
+.navbar-custom .navbar-brand:focus {
+  outline: none;
+}
+
+.navbar-custom .nav li a {
+  -webkit-transition: background 0.3s ease-in-out;
+  -moz-transition: background 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out;
+}
+.navbar-custom .nav li a:hover {
+  color: darkslategrey;
+  outline: none;
+  background-color: transparent;
+}
+.navbar-custom .nav li a:focus,
+.navbar-custom .nav li a:active {
+  outline: none;
+  background-color: transparent;
+}
+.navbar-custom .nav li.active {
+  outline: none;
+}
+.navbar-custom .nav li.active a {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.navbar-custom .nav li.active a:hover {
+  color: black;
+}
+@media (min-width: 768px) {
+  .navbar-custom {
+    padding: 20px 0;
+    border-bottom: none;
+    letter-spacing: 1px;
+    background: transparent;
+    -webkit-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+    -moz-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+    transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+  }
+  .navbar-custom.top-nav-collapse {
+    padding: 0;
+    background: black;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+}
+
+.attending-body{
+    display: table;
+    width: 100%;
+    height: auto;
+    padding: 60px 0;
+    text-align: center;
+    /*background-image:url("../img/testBackground.jpg");*/
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    min-height: 720px;
+    background-position: center;
+}
+
+.attending-body h1{
+    color:white;
+    font-size:30px;
+    font-weight:100;
+}
+
+.bio h1{
+    color:white;
+    font-size:30px;
+    font-weight:100;
+}
+
+.my-bio-text{
+  color:white;
+  font-size:38px;
+  font-weight:100;
+}
+
+.my-bio-description p{
+  font-weight:100;
+  font-size:27px;
+}
+
+.hosting-meals{
+  margin-top:100px;
+}
+
+.attending-meals{
+  margin-top:100px;
+  margin-bottom:100px;
+}
+

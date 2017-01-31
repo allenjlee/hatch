@@ -1,0 +1,92 @@
+body{
+    background:white;
+}
+
+body{
+    display: table;
+    width: 100%;
+    height: auto;
+    padding-top: 100px;
+    text-align: center;
+    background-image:url("../img/profBack.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    min-height: 630px;
+    background-position: center;
+    color:white;
+}
+
+.edit-profile-body h1{
+    color: white;
+    font-size:38px;
+    font-weight:100;
+}
+
+input{
+    border:none;
+}
+
+label{
+
+    margin-top:10px;
+    text-align: center;
+    margin-bottom:10px;
+    font-weight:100;
+}
+
+.edit-profile-picture{
+    padding-top:5px;
+}
+
+.btn-outline {
+    color: white;
+    border-color: white;
+    border: 1px solid;
+}
+
+#Recipe{
+    width:500px;
+    height:100px;
+}
+
+.bio-editing{
+    margin-top: 10px;
+}
+.bio-editing label{
+    font-size:18px;
+}
+
+.navbar-custom{
+    padding-bottom:0px;
+}
+
+.btn:hover{
+    background:white;
+    color:black;
+}
+
+#Recipe{
+    color:black;
+}
+
+.change-password h3{
+    margin-top:0;
+    color:white;
+}
+
+.btn-password{
+    margin-top:10px;
+    margin-bottom:30px;
+}
+#verify{
+    color:black;
+}
+#new{
+    color:black;
+}
+
+btn{
+  cursor:pointer;
+}

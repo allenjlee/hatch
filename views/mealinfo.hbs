@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Bootstrap -->
+    <link href = "/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato|Libre+Baskerville|Libre+Franklin|Pacifico" rel="stylesheet">
+    
+    <!-- CSS Plugin -->
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+
+    <!-- Theme CSS -->
+    
+    <link href="/stylesheets/browse.css" rel="stylesheet">
+    <link href = "/stylesheets/style.css" rel="stylesheet">
+    <link href="/stylesheets/profile.css" rel="stylesheet">
+    <link href="/stylesheets/mealProfile.css" rel="stylesheet">
+
+    <!--Jquery Plugin-->
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+     <!-- jQuery -->
+    <script src="/jquery/jquery.js"></script>
+
+
+    <!-- Theme JavaScript -->
+    <script src="/js/hatch.js"></script>
+    <link rel="icon" type="image/png" href="/img/logo.png">
+    <title>Hatch: Meal Info</title>
+</head>
+
+<body data-target=".navbar-fixed-top">
+  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container nav-color">
+            <div class="navbar-header">
+                <a class="navbar-brand page-scroll" href="/">
+                    <span><img src="/img/logo.png" width=25 height=25></span> Hatch
+                </a>
+            </div>
+            <div hidden><input type="String" id="username" placeholder="" name="username"></div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                        <li>
+                            <a class="page-scroll" href="/createMeal">Host A Meal</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" onclick="redirectBrowse()">Browse</a>
+                        </li>
+                        <li>
+                            <a id="signout-button" onclick="handleSignoutClick()">Sign Out</a>
+                        </li>
+
+                        <div hidden> <input type="String" id="username" placeholder="" name="username"> </div>
+                        <div hidden id="currentUser">{{title}}</div>
+                        <script> document.getElementById("username").value=document.getElementById("currentUser").innerHTML;</script>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="big-descripton">
+      <div class="big-description-body">
+        <div class="center-image-middle image-view">
+          <div class="container">
+            <center>
+              <div class="big-image" style="background-image:url({{img}});"></div>
+            </center>
+          </div>
+        </div>
+        <h1>{{mealName}}</h1>
+        <div class="createdBy">Hosted By: {{creator}}</div>
+        <div class="charging">${{price}} / per person</div>
+        <div class="when">{{mealTime}} | {{mealDay}} | {{location}}</div>
+        <div class="ppl-capacity">Total Capacity: {{capacity}} | Seats Left: {{count}}</div>
+        <div class="description-container">
+          <div class="describe-meal">{{description}} </div>
+        </div>
+        <center>
+        <button class="btn btn-lg btn-outline btn-block btn-signin btn-attend" onclick="findInfo()">Creator's Information</button>
+        </center>
+        <form id="attend" method="post" action=/createMeal/att{{_id}}>
+          <div hidden> <input type="username" class="form-control" id="username2" placeholder="" name="username"> </div>
+          <div hidden>{{createdUser}}</div>
+          <center>
+          <button id="go" class="btn btn-lg btn-outline btn-block btn-signin btn-attend" type="submit">Attend This Event
+          </button>
+          </center>
+        </form>
+        <center>
+          <p>Rate The Host</p>
+          <div class="rating">
+            <span onclick="rate(5)">☆</span><span onclick="rate(4)">☆</span><span onclick="rate(3)">☆</span><span onclick="rate(2)">☆</span><span onclick="rate(1)">☆</span>
+          </div>
+        
+        <form id="removeBut" method="post" action="/createMeal/remove" hidden>
+          <input type="Id" class="form-control" id="id" name="id">
+        </form>
+          <p id="remove"> <button class="btn btn-lg btn-outline btn-block btn-signin btn-attend" onclick="remove()">Remove This Event</button> </p>
+          <p id="mealId" hidden>{{_id}}</p>
+        </center>
+      </div>
+    </div>
+
+
+ <script type="text/javascript">
+                         var apiKey = 'AIzaSyCU2ps1u-92ArCXgh2NqUSTcqBCe7QSWMQ';
+      // Enter the API Discovery Docs that describes the APIs you want to
+      // access. In this example, we are accessing the People API, so we load
+      // Discovery Doc found here: https://developers.google.com/people/api/rest/
+      var discoveryDocs = ["https://people.googleapis.com/$discovery/rest?version=v1"];
+      // Enter a client ID for a web application from the Google API Console:
+      //   https://console.developers.google.com/apis/credentials?project=_
+      // In your API Console project, add a JavaScript origin that corresponds
+      //   to the domain where you will be running the script.
+      var clientId = '557591258050-0hoam1pv6a9h8cgqekeju9l054q5c3ck.apps.googleusercontent.com';
+      // Enter one or more authorization scopes. Refer to the documentation for
+      // the API or https://developers.google.com/people/v1/how-tos/authorizing
+      // for details.
+      var scopes = "profile";
+      
+      function handleClientLoad() {
+        // Load the API client and auth2 library
+        gapi.load('client:auth2', initClient);
+      }
+
+
+
+
+      function initClient() {
+        gapi.client.init({
+            apiKey: apiKey,
+            discoveryDocs: discoveryDocs,
+            clientId: clientId,
+            scope: scopes
+        }).then(function () {
+          
+          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+          
+        });
+      }
+
+
+      function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+          onSignInCallback();
+        } 
+      }
+
+
+
+function onSignInCallback() {
+      gapi.client.load('plus', 'v1', apiClientLoaded);
+    
+    
+  }
+
+  /**
+   * Sets up an API call after the Google API client loads.
+   */
+  function apiClientLoaded() {
+    gapi.client.plus.people.get({userId: 'me'}).execute(handleEmailResponse);
+  }
+
+  /**
+   * Response callback for when the API client receives a response.
+   *
+   * @param resp The API response object with the user email and profile information.
+   */
+  function handleEmailResponse(resp) {
+    var primaryEmail;
+    for (var i=0; i < resp.emails.length; i++) {
+      if (resp.emails[i].type === 'account') primaryEmail = resp.emails[i].value;
+    }
+   document.getElementById("username2").value=primaryEmail;
+   if("{{createdUser}}"!=document.getElementById("username2").value)
+      {
+        document.getElementById("remove").style.visibility = "hidden";
+      }
+    if(parseInt("{{count}}")<=0)
+    {
+      document.getElementById("go").style.visibility = "hidden";
+    }
+  }
+
+  function  remove()
+  {
+    document.getElementById("id").value=document.getElementById("mealId").innerHTML;
+    document.getElementById("removeBut").submit();
+  }
+
+  function rate(rating)
+  {
+    console.log(rating);
+    method = "post"; 
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", "/createMeal/"+"{{createdUser}}"+"/"+"{{_id}}");
+
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", "rating");
+            hiddenField.setAttribute("value", rating);
+            form.appendChild(hiddenField);
+    document.body.appendChild(form);
+    form.submit();
+  }
+
+
+  function redirectBrowse() {
+  	window.location.href = ("/browse"+document.getElementById("username2").value);
+  }
+
+
+
+  function handleSignoutClick(event) {
+        gapi.auth2.getAuthInstance().signOut();
+  window.location.replace('/');
+      }
+
+
+
+   function findInfo()
+   {
+   	window.location.href=("/info/{{createdUser}}");
+   }
+
+ 
+                    </script>
+                     <script async defer src="https://apis.google.com/js/api.js" 
+      onload="this.onload=function(){};handleClientLoad()" 
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+   
+      
+      
+</div>
+</html>

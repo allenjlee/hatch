@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+<h1><font color="white">Hello {{title}}</font></h1>
+
+
+
+<form name="addRecipe" id="addRecipe" method="post" action="/login/addRecipe/">
+  Edit Your Bio
+	<input type="String" id="Recipe" placeholder="" name="Recipe">
+	<button type="submit">Submit</button>
+	<h2> <input type="String" id="username" placeholder="" name="username"> </h2>
+  <h2 id="ref">{{title}}</h2>
+	<script> 
+  document.getElementById("username").value=document.getElementById("ref").innerHTML;
+  </script>
+</form>
+
+<p> <font size="8">Your Bio </p>
+<p>{{Bio}}</p>
+
+
+<button  id="signout-button" onclick="handleSignoutClick()">Sign Out</button>
+
+<p>Meals You're Attending </p>
+{{#each mealinfos2}}
+        {{> mealinfo_partial}}
+{{/each}}
+</html>

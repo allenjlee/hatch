@@ -2,11 +2,15 @@ var mongoose = require('mongoose');
 
 var mealinfoSchema= new mongoose.Schema({
     mealName: {type: String, required: true, index: {unique: true}},
-    mealDay: {type: Date, required: true},
-    mealType: {type: String, required:true},
-    mealStyle: {type: String, required:true},
-    location: {type: String, required:true},
-    img: {type: String, required:true}
+    mealDay: {type: String},
+    mealTime: {type: String},
+    location: {type: String},
+    description: {type: String},
+    createdBy: {type: String},
+    capacity: {type: Number},
+    attendingUsers: { type : Array , "default" : [] },
+    price: {type: String},
+    img: {type: String}
 });
 
 var mealInfo = mongoose.model('mealInfo', mealinfoSchema);

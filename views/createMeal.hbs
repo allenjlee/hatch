@@ -15,13 +15,22 @@
 
     <!-- Theme CSS -->
     <link href = "/stylesheets/style.css" rel="stylesheet">
-    <link href = "/stylesheets/createMeal.css" rel = "stylesheet">
+    
 
     <!--Jquery Plugin-->
+    <!-- jQuery -->
+    <script src="jquery/jquery.js"></script>
+    <script src="js/ajax.js"></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    
-    
+
+    <!--datepicker-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/> 
+    <link href = "/stylesheets/createMeal.css" rel = "stylesheet">
+    <link rel="icon" type="image/png" href="/img/logo.png">
+    <title>Hatch: Host A Meal</title>
 </head>
+
 
 <body id="page-top" data-spy = "scroll" data-target=".navbar-fixed-top">
 
@@ -41,10 +50,10 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="/browse">Browse</a>
+                        <a class="page-scroll" onclick="browse()">Browse</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="/profile">Your Profile</a>
+                        <a class="page-scroll" onclick="profile()">Your Profile</a>
                     </li>
                 </ul>
             </div>
@@ -57,6 +66,7 @@
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2 text">
                         <h1>Hatch A Meal</h1>
+                        <p>Please fill out the entire form and include an image</p>
                     </div>
                 </div>
             </div>
@@ -69,42 +79,177 @@
                 <div class="food-application">
                     <div class="form-group">
                         <label for="mealName">Title:</label>
-                        <input type="text" class="form-control mealName-add" name="mealName"  placeholder="Allen's Meal">
+                        <input type="text" class="form-control mealName-add" name="mealName" id="mealName" placeholder="Allen's Meal">
+                    </div>
+                    <div class="form-group dateinput"> <!-- Date input -->
+                        <label class="control-label datelabel" for="date">Pick A Day</label>
+                        <input class="form-control mealDay-add" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
                     </div>
                     <div class="form-group">
-                        <label for="mealDay">Date:</label>
-                        <input type="text" class="form-control mealDay-add" name="mealDay"  placeholder="January 19, 2017">
+                        <label for="mealTime">Pick a Time</label>
+                        <select class="form-control mealTime-add" id="mealTime">
+                        <option>9:00 AM</option>
+                        <option>9:30 AM </option>
+                        <option>10:00 AM</option>
+                        <option>10:30 AM </option>
+                        <option>11:00 AM</option>
+                        <option>11:30 AM </option>
+                        <option>12:00 PM</option>
+                        <option>12:30 PM </option>
+                        <option>1:00 PM</option>
+                        <option>1:30 PM </option>
+                        <option>2:00 PM</option>
+                        <option>3:00 PM</option>
+                        <option>6:00 PM </option>
+                        <option>6:30 PM </option>
+                        <option>7:00 PM</option>
+                        <option>7:30 PM </option>
+                        <option>8:00 PM</option>
+                        <option>8:30 PM </option>
+                        <option>9:00 PM</option>
+                        <option>9:30 PM </option>
+                        <option>10:00 PM</option>
+                        <option>10:30 PM </option>
+                        <option>11:00 PM</option>
+                        <option>11:30 PM </option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="mealType">Type:</label>
-                        <input type="text" class="form-control mealType-add" name="mealType"  placeholder="Breakfast, Lunch, Dinner">
+                        <label for="location">Pick Your Dorm:</label>
+                        <select class="form-control location-add" id="location">
+                        <option>Maseeh Hall</option>
+                        <option>McCormick Hall</option>
+                        <option>Burton-Conner House</option>
+                        <option>Next House</option>
+                        <option>Baker House</option>
+                        <option>Simmons Hall</option>
+                        <option>MacGregor House</option>
+                        <option>East Campus</option>
+                        <option>New House</option>
+                        <option>Random Hall</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="mealStyle">Style:</label>
-                        <input type="text" class="form-control mealStyle-add" name="mealStyle"  placeholder="Mexican, Vegan, Asian">
+                        <label for="price">Enter Your Price: </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="text" class="form-control price-add" name="price" aria-label="Amount (to the nearest dollar)">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="location">Location:</label>
-                        <input type="text" class="form-control location-add" name="location"  placeholder="Dorm Name">
+                        <label for="capacity">Maximum Capacity </label>
+                            <input type="number" class="form-control capacity-add" name="capacity">
                     </div>
                     <div class="form-group">
-                        <label for="description">Description:</label>
-                        <textarea class="form-control description-add" name="description" rows="3" placeholder="I'm making asian stir-fry with chicken and bokchoy."></textarea>
+                        <label for="description">Description (Room #, Menu, etc.):</label>
+                        <textarea class="form-control description-add" name="description" rows="3" placeholder="Room 121A - Meet at Lobby first
+Appetizer: Salt pepper calamari with tomatoes
+First Course: Egg with Avocado on Toast 
+Second Course: Grilled Pork Chop with Mango Chutney 
+Dessert: Green Tea Ice Cream with Mochi"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="img">Upload An Image:</label>
                         <input type="file" id="img_meal_upload" class="form-control-file img-add" name = "img" aria-describedby="fileHelp">
-                        <small id="fileHelp" class="form-text text-muted">Please submit only .jpg files.</small>
                     </div>
+                    <div hidden>
+                    <input type="text" class="form-control user-add" name="username" id="username" placeholder="">
+                    </div>
+
+                    <script type="text/javascript">
+                         var apiKey = 'AIzaSyCU2ps1u-92ArCXgh2NqUSTcqBCe7QSWMQ';
+      // Enter the API Discovery Docs that describes the APIs you want to
+      // access. In this example, we are accessing the People API, so we load
+      // Discovery Doc found here: https://developers.google.com/people/api/rest/
+      var discoveryDocs = ["https://people.googleapis.com/$discovery/rest?version=v1"];
+      // Enter a client ID for a web application from the Google API Console:
+      //   https://console.developers.google.com/apis/credentials?project=_
+      // In your API Console project, add a JavaScript origin that corresponds
+      //   to the domain where you will be running the script.
+      var clientId = '557591258050-0hoam1pv6a9h8cgqekeju9l054q5c3ck.apps.googleusercontent.com';
+      // Enter one or more authorization scopes. Refer to the documentation for
+      // the API or https://developers.google.com/people/v1/how-tos/authorizing
+      // for details.
+      var scopes = "profile";
+      
+      function handleClientLoad() {
+        // Load the API client and auth2 library
+        gapi.load('client:auth2', initClient);
+      }
+
+
+
+
+      function initClient() {
+        gapi.client.init({
+            apiKey: apiKey,
+            discoveryDocs: discoveryDocs,
+            clientId: clientId,
+            scope: scopes
+        }).then(function () {
+          
+          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+          
+        });
+      }
+
+
+      function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+          onSignInCallback();
+        } 
+      }
+
+
+
+function onSignInCallback() {
+      gapi.client.load('plus', 'v1', apiClientLoaded);
+    
+    
+  }
+
+  /**
+   * Sets up an API call after the Google API client loads.
+   */
+  function apiClientLoaded() {
+    gapi.client.plus.people.get({userId: 'me'}).execute(handleEmailResponse);
+  }
+
+  /**
+   * Response callback for when the API client receives a response.
+   *
+   * @param resp The API response object with the user email and profile information.
+   */
+  function handleEmailResponse(resp) {
+    var primaryEmail;
+    for (var i=0; i < resp.emails.length; i++) {
+      if (resp.emails[i].type === 'account') primaryEmail = resp.emails[i].value;
+    }
+   document.getElementById('username').value=primaryEmail;
+  }
+
+  function profile() {
+    window.location.href = ("/login/"+document.getElementById('username').value);
+  }
+  function browse() {
+    window.location.href = ("/browse"+document.getElementById('username').value);
+  }
+
+
+                    </script>
+                     <script async defer src="https://apis.google.com/js/api.js" 
+      onload="this.onload=function(){};handleClientLoad()" 
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+
+                    
                     <button class="add-submit btn btn-outline btn-xl page-scroll">Submit</button>
                 </div>
             </div>
         </div>
     </div>
     
-     <!-- jQuery -->
-    <script src="jquery/jquery.js"></script>
-    <script src="js/ajax.js"></script>
+     
 
 
     <!-- Theme JavaScript -->

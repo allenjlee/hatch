@@ -168,7 +168,7 @@ a:focus{
   color: #222;
   position: relative;
   padding-bottom: 100px;
-  padding-top:40px;
+  padding-top:80px;
 }
 #why-hatch h2{
   padding-top: 20px;
@@ -181,7 +181,6 @@ a:focus{
 }
 
 hr{
-  align: center;
   max-width: 200px;
   border-color:lightgrey;
 }
@@ -201,21 +200,49 @@ hr{
 
 /* About Us */
 #about{
-  background:#222;
+  background:black;
   text-align: center;
   color: white;
   position: relative;
   padding-bottom: 100px;
-  padding-top:40px;
+  padding-top:80px;
 }
 #about h2{
   padding-top: 20px;
   font-size: 30px;
   font-weight: 200;
+  padding-right:50px;
+  text-align: center;
 }
 
-.img-circle{
-    -webkit-border-radius: 500px;
-    -moz-border-radius: 500px;
-    border-radius: 500px;
+
+.about-thumbnail{
+    position: relative;
+    padding-bottom: 70%;
+    background-color: #eee;
+    background-size: cover;
+    background-position: center center;
+    height:250px;
+    width:250px;
+    border-radius:50%;
+    border:none;
+}
+
+.about-us{
+  font-size:30px;
+  font-weight:200;
+  margin-bottom:25px;
+}
+
+#about p{
+  padding-top:30px;
+}
+
+#about label{
+  font-size:25px;
+  font-weight:100;
+}
+
+.navbar-nav{
+  cursor:pointer;
 }

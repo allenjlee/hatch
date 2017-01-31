@@ -16,7 +16,7 @@ var createMeal = require('./routes/createMeal');
 var app = express();
 
 // database setup
-mongoose.connect("mongodb://hatch-mit:6WErk37ZjI9DdCUK0rhSHbNcpwPhu3bbqSMMjCEG390ohDEbZylOkSsXeNrDxNG5ZbC2ysHoDgZIIpvSmYG9Jg==@hatch-mit.documents.azure.com:10250/?ssl=true");
+mongoose.connect('mongodb://allen:allen@ds137759.mlab.com:37759/heroku_vdpl0qrs');
 var connection = mongoose.connection;
 connection.on('error', console.error.bind(console, 'connection error:'));
 connection.on('connected', function() {

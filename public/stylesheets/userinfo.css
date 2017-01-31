@@ -1,0 +1,20 @@
+.bio{
+    display: table;
+    width: 100%;
+    height: auto;
+    padding-top: 100px;
+    text-align: center;
+    background:url("../img/profBack.jpg") fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    color:white;
+    min-height:720px;
+}
+
+.hosted-hosts{
+    padding-top:20px;
+    padding-bottom:75px;
+}

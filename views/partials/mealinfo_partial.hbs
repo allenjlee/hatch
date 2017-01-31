@@ -1,8 +1,23 @@
-<div class="info-wrapper">
-    <img class="thumbnail" src={{img}}>
-    <h2>{{mealName}}</h2>
-    <div class=".col-xs-12 .col-md-8">{{mealDay}}</div>
-    <div class=".col-xs-12 .col-md-8">{{mealType}}</div>
-    <div class=".col-xs-12 .col-md-8">{{mealStyle}}</div>
-    <div class=".col-xs-12 .col-md-8">{{location}}</div>
-</div>
+
+<!DOCTYPE html>
+<html>
+
+    
+    <div class="col-sm-6 col-md-4 info-wrapper">
+        <div class="info-main">
+            <a href= /createMeal/{{_id}}>
+            <div class="thumbnail" style="background-image:url({{img}});"></div>
+            <div id="name">{{mealName}}</div>
+            </a>
+            <div class="price">${{price}} / per person</div>
+            <div class="dorm">{{location}}
+                <span class="day">| {{mealDay}} </span>
+                <span class="time">| {{mealTime}}</span>
+            </div>
+            <hr>
+            <div class=".col-xs-12 .col-md-8 overflow ellipsis">{{description}}</div>
+        </div>
+    </div>
+
+
+</html>

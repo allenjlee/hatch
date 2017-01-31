@@ -3,21 +3,23 @@
 </html>
 <head>
     <!-- Bootstrap -->
-    <link href = "bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href = "/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Custom Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato|Libre+Baskerville|Libre+Franklin|Pacifico" rel="stylesheet">
     
     <!-- CSS Plugin -->
-    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
 
     <!-- Theme CSS -->
-    <link href = "stylesheets/style.css" rel="stylesheet">
-    <link href="stylesheets/browse.css" rel="stylesheet">
+    <link href = "/stylesheets/style.css" rel="stylesheet">
+    <link href="/stylesheets/browse.css" rel="stylesheet">
 
     <!--Jquery Plugin-->
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     
+    <link rel="icon" type="image/png" href="/img/logo.png">
+    <title>Hatch: Browse Meals</title>
 </head>
 
 <body id="page-top" data-spy = "scroll" data-target=".navbar-fixed-top">
@@ -25,18 +27,33 @@
             <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand page-scroll" href="/">
-                        <span><img src="img/logo.png" width=25 height=25></span> Hatch
+                        <span><img src="/img/logo.png" width=25 height=25></span> Hatch
                     </a>
                 </div>
-                <div class="col-sm-3 col-md-3">
-                    <form class="navbar-form" role="search">
+                <div class="col-sm-3 col-md-3 search-bar">
+                    
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Choose A Dorm" name="q">
+                   
+                   
+                        <select class="form-control" id="location" name="location">
+                        <option value="All"> All </option>
+                        <option value="1">Maseeh Hall</option>
+                        <option value="2">McCormick Hall</option>
+                        <option value="3">Burton-Conner House</option>
+                        <option value="4">Next House</option>
+                        <option value="5">Baker House</option>
+                        <option value="6">Simmons Hall</option>
+                        <option value="7">MacGregor House</option>
+                        <option value="8">East Campus</option>
+                        <option value="9">New House</option>
+                        <option value="10">Random Hall</option>
+                        </select>
+
                         <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                            <button class="btn btn-default"  onclick="submitForm()"><i class="glyphicon glyphicon-search"></i></button>
                         </div>
                     </div>
-                    </form>
+                    
                 </div>
                 <!-- Collects the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
@@ -47,9 +64,20 @@
                         <li>
                             <a class="page-scroll" onclick="redirect()" >Your Profile</a>
                         </li>
+                        <li>
+                            <a id="signout-button" onclick="handleSignoutClick()">Sign Out</a>
+                        </li>
                         <script type="text/javascript"> 
                         function redirect(){
                             window.location.href = ("/login/"+document.getElementById("username").innerHTML);
+                        }
+
+
+                        function submitForm(){
+                        	console.log("working");
+                        	var e=document.getElementById("location");
+                        	console.log(e.options[e.selectedIndex].value);
+                        	window.location.replace ("/browse"+document.getElementById("username").innerHTML+"/"+e.options[e.selectedIndex].value);
                         }
                         </script>
                     </ul>
@@ -60,22 +88,89 @@
     </nav>
     <header class ="browse-main">
         <div class="browse-body">
-            <h1>Massachusetts Institute Of Technology</h1>
-            
+            <h1>Massachusetts Institute Of Technology</h1>  
+            <div class="container list-container">
+                <div class="row">     
             {{#each mealinfos}}
-                <div class = "col-6 col-md-4">
-                    {{> mealinfo_partial}}
-                </div>
+                {{> mealinfo_partial}}
             {{/each}}
+                </div>
+            </div>
         </div>
     </header>
     <!-- jQuery -->
-    <script src="jquery/jquery.js"></script>
+    <script src="/jquery/jquery.js"></script>
 
 
     <!-- Theme JavaScript -->
-    <script src="js/hatch.js"></script>
+    <script src="/js/hatch.js"></script>
     <script src='/js/ajax.js'></script>
 <p id="username" hidden>{{currentUser}}</p>
+
+
+
+<script type="text/javascript">
+      // Enter an API key from the Google API Console:
+      //   https://console.developers.google.com/apis/credentials
+      var apiKey = 'AIzaSyCU2ps1u-92ArCXgh2NqUSTcqBCe7QSWMQ';
+      // Enter the API Discovery Docs that describes the APIs you want to
+      // access. In this example, we are accessing the People API, so we load
+      // Discovery Doc found here: https://developers.google.com/people/api/rest/
+      var discoveryDocs = ["https://people.googleapis.com/$discovery/rest?version=v1"];
+      // Enter a client ID for a web application from the Google API Console:
+      //   https://console.developers.google.com/apis/credentials?project=_
+      // In your API Console project, add a JavaScript origin that corresponds
+      //   to the domain where you will be running the script.
+      var clientId = '557591258050-0hoam1pv6a9h8cgqekeju9l054q5c3ck.apps.googleusercontent.com';
+      // Enter one or more authorization scopes. Refer to the documentation for
+      // the API or https://developers.google.com/people/v1/how-tos/authorizing
+      // for details.
+      var scopes = "profile";
+      var signoutButton = document.getElementById('signout-button');
+      function handleClientLoad() {
+        // Load the API client and auth2 library
+        gapi.load('client:auth2', initClient);
+      }
+
+
+
+
+      function initClient() {
+        gapi.client.init({
+            apiKey: apiKey,
+            discoveryDocs: discoveryDocs,
+            clientId: clientId,
+            scope: scopes
+        }).then(function () {
+          // Listen for sign-in state changes.
+          console.log('ready');
+        });
+      }
+
+
+      
+        function createMeal(){
+      window.location.href= ("/createMeal"+document.getElementById('username').value);
+  }
+      function handleSignoutClick(event) {
+        gapi.auth2.getAuthInstance().signOut();
+	window.location.replace('/');
+      }
+      // Load the API and make an API call.  Display the results on the screen.
+      
+
+      function redirectBrowse(){
+                                window.location.href = ("/browse"+document.getElementById("username").value);
+                              }
+
+
+	
+
+    </script>
+    <script async defer src="https://apis.google.com/js/api.js" 
+      onload="this.onload=function(){};handleClientLoad()" 
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+   
 </body>
 </html>

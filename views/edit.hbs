@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!-- Bootstrap -->
+    <link href = "/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato|Libre+Baskerville|Libre+Franklin|Pacifico" rel="stylesheet">
+    
+    <!-- CSS Plugin -->
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+
+    <!-- Theme CSS -->
+    
+    <link href="/stylesheets/browse.css" rel="stylesheet">
+    <link href = "/stylesheets/style.css" rel="stylesheet">
+    <link href="/stylesheets/profile.css" rel="stylesheet">
+    <link href="/stylesheets/edit.css" rel="stylesheet">
+
+    <!--Jquery Plugin-->
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+     <!-- jQuery -->
+    <script src="jquery/jquery.js"></script>
+    <script src="js/ajax2.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="/js/hatch.js"></script>
+    <link rel="icon" type="image/png" href="/img/logo.png">
+    <title>Hatch: Edit Your Profile</title>
+</head>
+
+<body data-target=".navbar-fixed-top">
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container nav-color">
+            <div class="navbar-header">
+                <a class="navbar-brand page-scroll" href="/">
+                    <span><img src="/img/logo.png" width=25 height=25></span> Hatch
+                </a>
+            </div>
+            <div hidden id="currentUser">{{username}}</div>
+            <div hidden><input type="String" id="username" placeholder="" name="username"></div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                        <li>
+                            <a class="page-scroll" href="/createMeal">Host A Meal</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" onclick="redirectBrowse()">Browse</a>
+                        </li>
+                        <li>
+                        	<a class="page-scroll" onclick="redirect()" >Your Profile</a>
+                        </li>
+                        
+                        <script> document.getElementById("username").value=document.getElementById("currentUser").innerHTML;
+                        </script>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="edit-profile">
+        <div class="edit-profile-body">
+            <center><h1>Edit Your Profile</h1></center>
+        </div>
+        <div class="container edit-profile-picture">
+            <div class="col-md-3">
+                {{#each users}}
+                <div class="propic" style='background-image:url({{proPic}});'></div>
+                {{/each}}
+                 <label for="img">Change Your Profile Picture:</label>
+                <div class="form-group">
+                   
+                    <input type="file" id="profile_pic_upload" class="form-control-file img-add" name = "img" aria-describedby="fileHelp">
+                    <div hidden><input type="text" class="form-control username-add" id="username2" name="username"></div>
+                </div>
+                <script type="text/javascript">
+                document.getElementById("username2").value=document.getElementById("currentUser").innerHTML;
+                </script>
+                <button class="profile-submit btn btn-outline btn-xl page-scroll">Submit</button>
+                <div class="change-password">
+                        <label for="passwordChange">Change Your Password:</label>
+                        <form id="change" method="POST" action="/login/changePassword">
+                        Enter Your New Password:
+                        <input type="password" name="new" id="new">
+                        <div>
+                        Verify Your New Password:
+                        <input type="password" name="verify" id="verify">
+                        <button class="pass-button btn btn-outline btn-xl page-scroll btn-password" onclick="changePass()">Submit</button>
+                        <div hidden><input type="text" class="form-control username-add" id="username3" name="username"></div>
+                        </div>
+                        </form>   
+                </div>
+            </div>
+
+
+
+
+
+            <div class="col-md-9">
+                <div class="my-bio-description">
+                    <div class="my-bio-text">My Bio:</div>
+                    {{#each users}}
+                    <p> {{favorites}} </p>
+                    {{/each}}
+                </div>
+                <div class="bio-editing">
+                    <label for="texting">Edit Your Bio: </label>
+                    <center>
+                    <form name="addRecipe" id="addRecipe" method="post" action="/login/addRecipe/">
+                    
+                        <textarea type="String" id="Recipe" placeholder="" name="Recipe"></textarea>
+                        <div class="form-group">
+                            <button class="bio-button btn btn-outline btn-xl page-scroll" type="submit">Submit</button>
+                        </div>
+                        <h2> <input type="String" id="username4" placeholder="" name="username"> </h2>
+                    <script> 
+                    document.getElementById("username4").value=document.getElementById("currentUser").innerHTML;
+                    </script>
+                    </form>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+        
+
+
+
+
+<script>
+ 			function redirectBrowse(){
+                                window.location.href = ("/browse"+document.getElementById("username").value);
+                              }
+
+
+            function redirect(){
+                            window.location.href = ("/login/"+document.getElementById("username").value);
+                        }
+            function changePass(){
+                if(document.getElementById("new").value==document.getElementById("verify").value)
+                {
+                    document.getElementById("username3").value=document.getElementById("currentUser").innerHTML;
+                    document.getElementById("change").submit();
+                }
+                else
+                {
+
+                    var x = document.createElement("P"); 
+                    var textnode=document.createTextNode("Your Passwords Don't Match");                       
+                    x.appendChild(textnode);                                           
+                    document.getElementById("change").appendChild(x);                              
+
+
+                    
+                    
+                }
+            }
+</script>
+
+
+
+    </body>
+
+
+
+</html>

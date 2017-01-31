@@ -4,83 +4,176 @@
 <head>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<style>
+<!-- Bootstrap -->
+    <link href = "/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato|Libre+Baskerville|Libre+Franklin|Pacifico" rel="stylesheet">
+    
+    <!-- CSS Plugin -->
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
 
-h1 {
-    color: white;
-} 
+    <!-- Theme CSS -->
+    
+    <link href="/stylesheets/browse.css" rel="stylesheet">
+    <link href = "/stylesheets/style.css" rel="stylesheet">
+    <link href="/stylesheets/profile.css" rel="stylesheet">
 
-
-
-
-
-button {
-  border: solid 1px somecolor;
-  color: #eee;
-  border-radius:5px;
- -moz-border-radius:5px;
-  background: -moz-linear-gradient(top, #5E5E5E 0%, #474747 51%, #0a0e0a 51%, #0a0809 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5E5E5E), color-stop(51%,#474747), color-stop(51%,#0a0e0a), color-stop(100%,#0a0809));
-}
-
-input {
-  border: 2px solid #999;
-  border-radius: 5px;
-
-  
-}
+    <!--Jquery Plugin-->
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+     <!-- jQuery -->
+    <script src="/jquery/jquery.js"></script>
 
 
+    <!-- Theme JavaScript -->
+    <script src="/js/hatch.js"></script>
 
-
-body
-{
-background-image: url("http://www.activeaims.co.uk/wp-content/uploads/2013/01/preparing_food.jpg");
-background-repeat: no-repeat;
-background-size:cover;
-color:white;
-}
-h2{
-visibility: hidden;
-}
-title{
-visibility:hidden;
-}
-h1{
-font-size: 14px;
-}
-
-</style>
+    <link rel="icon" type="image/png" href="/img/logo.png">
+    <title>Hatch: Your Profile</title>
 </head>
 
 
 
+<body data-target=".navbar-fixed-top">
+  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container nav-color">
+            <div class="navbar-header">
+                <a class="navbar-brand page-scroll" href="/">
+                    <span><img src="/img/logo.png" width=25 height=25></span> Hatch
+                </a>
+            </div>
+            <div hidden><input type="String" id="username" placeholder="" name="username"></div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                        <li>
+                            <a class="page-scroll" href="/createMeal">Host A Meal</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" onclick="redirectBrowse()">Browse</a>
+                        </li>
+                        <li>
+                        	<a class="page-scroll" onclick="editProfile()">Edit Profile</a>
+                        </li>
+                        <li>
+                            <a id="signout-button" onclick="handleSignoutClick()">Sign Out</a>
+                        </li>
+                        <div hidden> <input type="String" id="username" placeholder="" name="username"> </div>
+                        <div hidden id="currentUser">{{title}}</div>
+                        <script> document.getElementById("username").value=document.getElementById("currentUser").innerHTML;</script>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class= "bio">
+      <div class="bio-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="profile-description">
+                <div class="propic" style='background-image:url({{proPic}});'></div>
+                <div class="profile-bio">
+                  <p>{{name}}</p>
+                  <p> Rating: {{rating}} / 5.00</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-9">
+              <div class="my-bio-description">
+                <div class="my-bio-text">My Bio:</div>
+                <p> {{Bio}} </p>
+              </div>
+            </div>
+          </div>
+          <div class="hosting-meals">
+              <h1>Meals I've Hosted</h1>
+              <div class="row justify-content-center">    
+                {{#each mealinfos1}}
+                  {{> profile_partial}}
+                {{/each}}
+              </div>
+          </div>
+          <div class="attending-meals">
+              <h1>Meals I'm Attending</h1>
+              <div class="row justify-content-center">
+                {{#each mealinfos2}}
+                  {{> profile_partial}}
+                {{/each}}
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
-<title>{{title}}</title>
-<body>
-
-<h1><font color="white">Hello {{title}}</font></h1>
 
 
+<script type="text/javascript">
+      // Enter an API key from the Google API Console:
+      //   https://console.developers.google.com/apis/credentials
+      var apiKey = 'AIzaSyCU2ps1u-92ArCXgh2NqUSTcqBCe7QSWMQ';
+      // Enter the API Discovery Docs that describes the APIs you want to
+      // access. In this example, we are accessing the People API, so we load
+      // Discovery Doc found here: https://developers.google.com/people/api/rest/
+      var discoveryDocs = ["https://people.googleapis.com/$discovery/rest?version=v1"];
+      // Enter a client ID for a web application from the Google API Console:
+      //   https://console.developers.google.com/apis/credentials?project=_
+      // In your API Console project, add a JavaScript origin that corresponds
+      //   to the domain where you will be running the script.
+      var clientId = '557591258050-0hoam1pv6a9h8cgqekeju9l054q5c3ck.apps.googleusercontent.com';
+      // Enter one or more authorization scopes. Refer to the documentation for
+      // the API or https://developers.google.com/people/v1/how-tos/authorizing
+      // for details.
+      var scopes = "profile";
+      var signoutButton = document.getElementById('signout-button');
+      function handleClientLoad() {
+        // Load the API client and auth2 library
+        gapi.load('client:auth2', initClient);
+      }
 
-<form name="addRecipe" id="addRecipe" method="post" action="/login/addRecipe/">
-Add a Recipe
-
-	<input type="String" id="Recipe" placeholder="" name="Recipe">
-	<button type="submit">Submit</button>
-	<h2> <input type="String" id="username" placeholder="" name="username"> </h2>
-	<script> document.getElementById("username").value=document.title;</script>
-</form>
-
-<p> <font size="8">Your Favorites </p>
-{{#each FavoriteRecipes}}
-<h1>{{ this }}</h1>
-{{/each}}
 
 
 
+      function initClient() {
+        gapi.client.init({
+            apiKey: apiKey,
+            discoveryDocs: discoveryDocs,
+            clientId: clientId,
+            scope: scopes
+        }).then(function () {
+          // Listen for sign-in state changes.
+          console.log('ready');
+        });
+      }
 
+
+      
+  function createMeal(){
+      window.location.href= ("/createMeal");
+  }
+      function handleSignoutClick(event) {
+        gapi.auth2.getAuthInstance().signOut();
+	window.location.replace('/');
+      }
+      // Load the API and make an API call.  Display the results on the screen.
+      
+
+      function redirectBrowse(){
+                                window.location.href = ("/browse"+document.getElementById("username").value);
+                              }
+
+       function editProfile(){
+
+       		window.location.href = ("/edit"+document.getElementById("username").value);
+       }
+	
+
+    </script>
+    <script async defer src="https://apis.google.com/js/api.js" 
+      onload="this.onload=function(){};handleClientLoad()" 
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
    
 
 

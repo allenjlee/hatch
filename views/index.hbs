@@ -4,16 +4,16 @@
 <head>
     <title>Hatch</title>
     <!-- Bootstrap -->
-    <link href = "bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href = "/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Custom Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato|Libre+Baskerville|Libre+Franklin|Pacifico" rel="stylesheet">
     
     <!-- CSS Plugin -->
-    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
     <!-- Theme CSS -->
-    <link href = "stylesheets/style.css" rel = "stylesheet">
-    
+    <link href = "/stylesheets/style.css" rel = "stylesheet">
+    <link rel="icon" type="image/png" href="/img/logo.png">
 </head>
 
 
@@ -124,13 +124,13 @@
 
 
 
-<body id="page-top" data-spy = "scroll" data-target=".navbar-fixed-top">
+<body id="page-top" data-target=".navbar-fixed-top">
 
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand page-scroll" href="#page-top">
-                    <span><img src="img/logo.png" width=25 height=25></span> Hatch
+                    <span><img src="/img/logo.png" width=25 height=25></span> Hatch
                 </a>
             </div>
 
@@ -174,7 +174,7 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <h1 class="brand-head">Hatch</h1>
-                        <p class="intro">Hang out with friends. Meet new people. Eat Food.<p>
+                        <p class="intro">Become a Chef. Meet New People. Eat Food.<p>
                         <a onclick="redirect()" class="btn btn-outline btn-xl page-scroll">Are You Ready?</a>
                         <script type="text/javascript"> 
                         function redirect(){
@@ -206,53 +206,68 @@
         <div class = "container">
             <div class="explore-heading">
                 <h2>How Hatch Works</h2>
-                <p class="first">Bringing home-cooked meals to students everywhere</p>
+                <p class="first">Empowering student chefs and bringing people together</p>
                 <hr>
             </div>
             <div class="blurbs row">
                 <div class="col-sm-4 blurb">
                     <div id="website-icon">
-                        <img src="img/interface.png" width=120 height=120>
+                        <img src="/img/interface.png" width=120 height=120>
                         <h3>Browse</h3>
                     </div>
                 </div>
                 <div class="col-sm-4 blurb">
                     <div id="food-icon">
-                        <img src= "img/food.png" width=120 height=120>
+                        <img src= "/img/food.png" width=120 height=120>
                         <h3>Eat</h3>
                     </div>
                 </div>
                 <div class="col-sm-4 blurb">
                     <div id="people-icon">
-                        <img src="img/people.png" width=120 height=120>
+                        <img src="/img/people.png" width=120 height=120>
                         <h3>Hangout</h3>
                     </div>
                 </div>
             </div>
             <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                Hatch was designed to let students at MIT open up their own pop-up restaurant in their dorm and eat at these student run restaurants. 
+                For students who are aspiring chefs, they can host meals on Hatch so that other students can see what they're making.  
             </p>
             <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                For those interested in eating out, you can search for meals at specific dorms, see what hosts have made in the past by going to their profile, and rate the host's cooking.
+                All it takes is a few clicks and you're set!
             </p>
         </div>
     </section>
 
     <section id="about">
         <div class="container">
-            <div class="about-heading">
-                <h2>About Us</h2>
-                <hr>
-            </div>
+            <center>
+                <div class="about-us">About Us</div>
+            </center>
             <div class="row">
+                <center>
                 <div class="col-sm-4">
                     <div id="allen-pic">
-                        <img class="img-circle" src="img/allen.jpg" width=300 height=200>
+                        <div class="about-thumbnail" style="background-image:url('../img/allen.jpg');"></div>
+                    </div>
+                    <label for="allen-lee">Allen Lee</label>
+                </div>
+                <div class="col-sm-4">
+                    <div id="allen-pic">
+                        <div class="about-thumbnail" style="background-image:url('../img/logo.png');"></div>
                     </div>
                 </div>
+                <div class="col-sm-4">
+                    <div id="allen-pic">
+                        <div class="about-thumbnail" style="background-image:url('../img/liu.jpg');"></div>
+                    </div>
+                    <label for="allen-liu">Allen Liu</label>
+                </div>
+                <center>
             </div>
             <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                Thanks for trying out our website! If you have any inquiries, email us at ask_hatch@mit.edu!
             </p>
         </div>
     </section>
@@ -260,11 +275,11 @@
 
 
     <!-- jQuery -->
-    <script src="jquery/jquery.js"></script>
+    <script src="/jquery/jquery.js"></script>
 
 
     <!-- Theme JavaScript -->
-    <script src="js/hatch.js"></script>
+    <script src="/js/hatch.js"></script>
 
     <!-- Icon made by Freepik from www.flaticon.com -->
 

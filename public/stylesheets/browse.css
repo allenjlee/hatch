@@ -10,7 +10,7 @@ h1{
   padding: 100px 0;
   text-align: center;
   color:whitesmoke;
-  background: /* top, transparent black, faked with gradient */ 
+  background: 
     linear-gradient(
       rgba(0, 0, 0, 0.7), 
       rgba(0, 0, 0, 0.7)
@@ -19,7 +19,7 @@ h1{
   -moz-background-size:cover;
   background-size: cover;
   -o-background-size:cover;
-  min-height: 720px;
+  min-height: 1000px;
   background-position: center;
 }
 
@@ -93,15 +93,79 @@ h1{
 
 /* thumbnail */
 .thumbnail{
-    height: auto;
-    width: auto;
-    min-width: 300px;
-    min-height: 200px;
-    max-width: 300px;
-    max-height: 200px;
-    margin-left: calc(50% - 150px);
+    position: relative;
+    padding-bottom: 70%;
+    background-color: #eee;
+    background-size: cover;
+    background-position: center center;
 }
 
 .info-wrapper{
   padding-bottom:20px;
+  color:black;
+}
+
+@media (min-width: 768px)
+.col-sm-6{
+    width: 50%;
+}
+
+.meal-img{
+  position: relative;
+  padding-bottom: 70%;
+  background-color: #eee;
+  background-size: cover;
+  background-position: center center;
+}
+
+.info-main{
+  border-color: #eee;
+  border-width: 1px;
+  border-style: solid;
+  box-shadow: 0 3px 0 #eee;
+  background-color:white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.info-main a{
+  font-size: 20px;
+  font-weight: 100;
+  color:black;
+}
+
+.search-bar {
+    padding-top: 7px;
+    width: 25%;
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+
+  /* Required for text-overflow to do anything */
+}
+.overflow {
+    height: 2em;
+  
+  /**
+   * Required properties to achieve text-overflow
+   */
+    overflow: hidden;
+}
+
+hr{
+  margin-top:10px;
+  margin-bottom:5px;
+}
+
+.navbar-nav{
+  cursor:pointer;
 }

@@ -6,17 +6,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <!-- boostrap and fonts -->
-    <link href = "bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href = "/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato|Libre+Baskerville|Libre+Franklin|Pacifico" rel="stylesheet">
     
     <!-- CSS Plugin -->
-    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
     <script src='/js/ajax.js'></script>
     
     <!-- theme css sheets -->
-    <link href="stylesheets/style.css" rel="stylesheet">
-    <link href="stylesheets/login.css" rel="stylesheet">  
-
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <link href="/stylesheets/login.css" rel="stylesheet">  
+    <link rel="icon" type="image/png" href="/img/logo.png">
+    <title>Hatch: Register</title>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand page-scroll" href="/">
-                    <span><img src="img/logo.png" width=25 height=25></span> Hatch
+                    <span><img src="/img/logo.png" width=25 height=25></span> Hatch
                 </a>
             </div>
         </div>
@@ -32,9 +33,14 @@
     <div class="signup-page">
       <div class="container">
           <div class="login login-container">
-              <img id="hatch-logo" class="login-image" src="img/logo.png"/>
+              <img id="hatch-logo" class="login-image" src="/img/logo.png"/>
               <p class="login-name"></p>
-          <form class = "signup" method="post" action="/login/add">
+          <p id="Authorization" >  Authorize With Google Account First</p>
+          <!--Add buttons to initiate auth sequence and sign out-->
+        <button class="btn btn-lg btn-primary btn-block btn-signin" id="authorize-button" onclick="handleAuthClick()">Authorize</button>
+        <button class="btn btn-lg btn-primary btn-block btn-signin" id="signout-button" onclick="handleSignoutClick()">Google Sign Out</button>
+        
+          <form id="signup" class = "signup" method="post" action="/login/add">
               <span id= "reauth-email" class="reauth-email"></span>
                 <div class="form-group">
                   <input type="username" class="form-control" id="userName" placeholder="Username" name="username">
@@ -42,13 +48,11 @@
                 <div class="form-group">
                   <input type= "password" class="form-control" id="Password" placeholder="Password" name="password">
                 </div>
+                <div hidden>
+                <input type= "name" class="form-control" id="name" placeholder="" name="name">
+                </div>
               <button class="btn btn-lg btn-primary btn-block btn-signin" onclick="submitForm()" type="submit">Register</button>
           </form>
-          <p id="Authorization" >  Authorize With Google Account</p>
-          <!--Add buttons to initiate auth sequence and sign out-->
-        <button class="btn btn-lg btn-primary btn-block btn-signin" id="authorize-button" onclick="handleAuthClick()">Authorize</button>
-        <button class="btn btn-lg btn-primary btn-block btn-signin" id="signout-button" onclick="handleSignoutClick()">Sign Out</button>
-        
           </div>
       </div>
     </div>
@@ -130,7 +134,8 @@
         }).then(function(resp) {
           var p = document.createElement('p');
           var name = resp.result.names[0].givenName;
-          p.appendChild(document.createTextNode('Hello, '+name+'!'));
+          var last= resp.result.names[0].familyName;
+          document.getElementById("name").value=name+" "+last;
           document.getElementById('Authorization').appendChild(p);
         });
       }
@@ -167,13 +172,12 @@ function onSignInCallback() {
 	function submitForm() {
 	  if(gapi.auth2.getAuthInstance().isSignedIn.get()){
 		var check;
-		check=document.getElementById('realName').value;
-    
+		check=document.getElementById('name').value;
 		var realname;
 		 gapi.client.people.people.get({
           	resourceName: 'people/me'
         	}).then(function(resp) {
-         	  realname = resp.result.names[0].givenName;
+         	  realname = resp.result.names[0].givenName+" "+resp.result.names[0].familyName;
 		  
 		  if(check==realname)
 		  {
