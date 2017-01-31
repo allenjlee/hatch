@@ -11,7 +11,7 @@ Users must have a Google account, as our website requires you to Authorize that 
 
 ## Info About Hatch and It's Creation
 
-Hatch is created by Allen Lee and Allen Liu (Yes! Allen^2) for the Web Application Competition at MIT. We spent under two weeks working on the web application, and used Node.js/Express framework with MongoDB back-end. We also integrated Microsoft Azure services by storing files with Azure Blob and using Azure Databases to put our database on the cloud. The web application is fully functional, allowing users to register unique accounts, manage their profile, become a chef by hosting meals, browse the meals other students are hosting, and search for specific meals based off of dorm location. 
+Hatch is created by Allen Lee and Allen Liu for the Web Application Competition at MIT. We spent under two weeks working on the web application, and used Node.js/Express framework with MongoDB back-end. We also integrated Microsoft Azure services by storing files with Azure Blob and using Azure Databases to put our database on the cloud. The web application is fully functional, allowing users to register unique accounts, manage their profile, become a chef by hosting meals, browse the meals other students are hosting, and search for specific meals based off of dorm location. 
 
 ## Enjoy!
 
