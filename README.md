@@ -1,3 +1,6 @@
+## Hatch was first created in a private repository, 203 commits - 2 contributors. 
+## See the website at: https://hatch-mit.herokuapp.com
+
 ## Hatch - Browse. Eat. Hangout.
 
 Hatch is a web application that gives students a platform to open up their own restaurant out of their dorm.
