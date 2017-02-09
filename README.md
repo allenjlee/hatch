@@ -1,4 +1,4 @@
-## Hatch was first created in a private repository, 203 commits - 2 contributors. 
+## Hatch was first created in a private repository, 203 commits - 2 contributors (made with Allen Liu). 
 ## See the website at: https://hatch-mit.herokuapp.com
 
 ## Hatch - Browse. Eat. Hangout.
